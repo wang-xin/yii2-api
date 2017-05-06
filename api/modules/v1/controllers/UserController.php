@@ -2,12 +2,20 @@
 
 namespace api\modules\v1\controllers;
 
-use yii\rest\Controller;
+use yii\filters\auth\QueryParamAuth;
+use yii\helpers\ArrayHelper;
+use yii\rest\ActiveController;
 
-/**
- * User controller for the `v1` module
- */
-class UserController extends Controller
+class UserController extends ActiveController
 {
+    public $modelClass = 'common\models\User';
 
+    public function behaviors()
+    {
+        return ArrayHelper::merge(parent::behaviors(), [
+            'authenticator' => [
+                'class' => QueryParamAuth::className()
+            ]
+        ]);
+    }
 }

@@ -23,6 +23,7 @@ return [
         'user'         => [
             'identityClass'   => 'common\models\User',
             'enableAutoLogin' => true,
+            'enableSession'=>false,
             'identityCookie'  => ['name' => '_identity-api', 'httpOnly' => true],
         ],
         'session'      => [
@@ -46,6 +47,10 @@ return [
             'showScriptName'      => false,
             'enableStrictParsing' => true,
             'rules'               => [
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'controller' => ['v1/user'],
+                ],
             ],
         ],
     ],
